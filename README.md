@@ -1,1 +1,2 @@
-# FinalGroup
+# FinalGroup 
+Harold Dennis Barraza Duran
