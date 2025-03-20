@@ -1,0 +1,21 @@
+.searchbar{
+    width: 100%;
+    background-color: #E5E0DD;
+    border-style: none;
+    color: #030303;
+
+}
+.totalsearch{
+    display: flex;
+    width: 100%;
+    padding: 10px;
+    border-radius: 20px;
+    border-color: black;
+    border-style: solid;
+    margin-left: 13%;
+    background-color: #E5E0DD;
+    margin-bottom: 2%;
+}
+img{
+    width: 5%;
+}

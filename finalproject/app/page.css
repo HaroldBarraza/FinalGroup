@@ -1,0 +1,22 @@
+.heros{
+    background-color: #C4DBE1;
+    color: #030303;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    margin: 1% 1% 1% 1%;
+    padding: 1%;
+}
+h1{
+    font-family: "Playfair Display", serif;
+    font-size: 85px;
+}
+.text p{
+    font-family: "Roboto", sans-serif;
+    text-align: left;
+}
+.products img{
+    width: 90%;
+}
+main{
+    background-color: #FAFAFA;
+}
