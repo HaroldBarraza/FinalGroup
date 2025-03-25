@@ -1,4 +1,4 @@
-import Image from "next/image";
+
 import '@/app/dashboard/aboutus/page.css'
 
 export default function AboutUsPage() {
