@@ -1,9 +1,10 @@
+// app/layout.tsx
 import "./globals.css";
-import {inter} from '@/app/ui/fonts'
-import {Metadata} from 'next';
+import { inter } from '@/app/ui/fonts';
+import { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title:{
+  title: {
     template: '%s | Acme Dashboard',
     default: 'Acme Dashboard',
   },

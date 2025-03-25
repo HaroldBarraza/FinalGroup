@@ -7,8 +7,8 @@ import Search from "@/app/ui/invoices/search";
 export default function SideNav(){
     return(
         <div className="sidenav">
-            <Link href="/">Home</Link>
-            <Link href="/aboutus">About Us</Link>
+            <Link href="/">Home</Link>  
+            <Link href="/dashboard/aboutus">About Us</Link>
             <div className="logo">
                 <Homelogo/>
             </div>
