@@ -1,5 +1,4 @@
 import Link from "next/link";
-import Image from "next/image";
 import Homelogo from "@/app/ui/invoices/home-logo";
 import '@/app/ui/dashboard/sidenav.css'
 import Search from "@/app/ui/invoices/search";
