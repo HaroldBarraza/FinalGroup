@@ -17,7 +17,7 @@ export default function AboutUsPage() {
                 </div>
             </div>
             <div>
-                <h3>We're building a new kind of marketplace, a place that's fair for all, not a free-for-all, where the handmade is carefully curated and collected</h3>
+                <h3>We are building a new kind of marketplace, a place that is fair for all, not a free-for-all, where the handmade is carefully curated and collected</h3>
                 <div className='imagen2'>
                 <Image src='/foto.jpg' alt ="Logo" width={1500} height={1032}/>
                 </div>
