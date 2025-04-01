@@ -2,6 +2,7 @@ import Link from "next/link";
 import Homelogo from "@/app/ui/invoices/home-logo";
 import '@/app/ui/dashboard/sidenav.css'
 import Search from "@/app/ui/invoices/search";
+import { Suspense } from 'react';
 
 
 export default function SideNav(){
@@ -14,7 +15,9 @@ export default function SideNav(){
             </div>
             <Link href="/login">Log In</Link>
             <div className="search">
-            <Search placeholder="Search..."/>
+                <Suspense fallback={<div>Searching...</div>}>
+                    <Search placeholder="Search..." />
+                </Suspense>
             </div>
 
         </div>

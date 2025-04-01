@@ -22,9 +22,6 @@ export default function AboutUsPage() {
                 <Image src='/foto.jpg' alt ="Logo" width={1500} height={1032}/>
                 </div>
             </div>
-            <div className="aboutuslocation">
-            <iframe src="https://www.google.com/maps/embed?pb=!1m10!1m8!1m3!1d922.4645574657181!2d-70.01525416502973!3d-15.83527874625025!3m2!1i1024!2i768!4f13.1!5e0!3m2!1ses-419!2spe!4v1743524873475!5m2!1ses-419!2spe" width="600" height="450"  loading="lazy"></iframe>
-            </div>
         </div>
 
 
