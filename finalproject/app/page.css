@@ -24,7 +24,8 @@ main{
 .jew h2,.decor h2,.ceramic h2,.clothing h2{
     color: #030303;
     font-family: "Playfair Display", serif;
-    font-size: 50px;
+    font-size: 70px;
+    text-align: center;
 }
 .jew p,.decor p,.ceramic p,.clothing p{
     color: #030303;
@@ -41,4 +42,31 @@ background-color: #C4DBE1;
 }
 .clothing{
     background-color: #8f9d86;
+}
+.clothing, .ceramic, .decor, .jew{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 100px 1fr 1fr;
+    margin: 1% 1% 1% 1%;
+    padding: 1%;
+    font-size: 50px;
+}
+.clothing img, .jew img{
+    grid-row: 1/4;
+    margin-left: 4%;
+}
+.ceramic img, .decor img{
+    grid-row: 1/4;
+    grid-column: 2;
+
+}
+.clothing button{
+    background-color: #8f9d86;
+}
+.ceramic button{
+    background-color: #C4DBE1
+}
+ 
+.jew button{
+    background-color: #C9C1BD
 }

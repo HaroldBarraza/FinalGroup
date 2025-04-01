@@ -2,6 +2,8 @@ import SideNav from "./ui/dashboard/sidenav"
 import '@/app/page.css'
 import '@/app/ui/button.css'
 import Image from "next/image";
+import Link from "next/link";
+import Footer from "@/app/ui/dashboard/footer";
 
 export default function Page() {
   return(
@@ -20,27 +22,25 @@ export default function Page() {
       <div className="jew">
         <h2>Jewelry</h2>
         <p>One of the largest and most unique collection of handmade jewelry </p>
-        <button>SHOP ALL</button>
-        <Image src='/jewelry.webp' alt="jew" width={1500} height={1032} style={{width:'90%', height:'auto'}}/>
-      </div>
-      <div className="decor">
-        <h2>Home Decor</h2>
-        <p>One of the largest and most unique collection of handmade jewelry </p>
-        <button>SHOP COLLECTION</button>
-        <Image src='/hats.jpg' alt="jew" width={1500} height={1032} style={{width:'90%', height:'auto'}}/>
+        <Link href='/dashboard/jewelry'><button>SHOP ALL</button></Link>
+        
+        <Image src='/jewelry.jpg' alt="jew" width={1500} height={1032} style={{width:'90%', height:'auto'}}/>
       </div>
       <div className="ceramic">
         <h2>Ceramic</h2>
         <p>One of the largest and most unique collection of handmade jewelry </p>
-        <button>SHOP ALL</button>
-        <Image src='/ceramic.jpg' alt="jew" width={1500} height={1032} style={{width:'90%', height:'auto'}}/>
+        <Link href='/dashboard/ceramic' ><button  >SHOP COLLECTION</button></Link>
+        <Image src='/ceramic.jpg' alt="jew" width={1500} height={1032} style={{width:'100%', height:'auto'}}/>
       </div>
       <div className="clothing">
         <h2>Clothing</h2>
         <p>One of the largest and most unique collection of handmade jewelry </p>
-        <button>SHOP COLLECTION</button>
-        <Image src='/clothing.webp' alt="jew" width={1500} height={1032} style={{width:'90%', height:'auto'}}/>
+        <Link href='/dashboard/clothing'><button>SHOP ALL</button> </Link>
+        
+        <Image src='/clothing.jpg' alt="jew" width={1500} height={1032} style={{width:'90%', height:'auto'}}/>
       </div>
+      <Footer />
+
 
     </main>
   )

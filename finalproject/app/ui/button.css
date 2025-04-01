@@ -5,8 +5,9 @@ button{
     font-size: 40px;
     border-radius: 37px;
     border-style: solid;
-    padding: 7px;
-    transition: border-color 1s ease, background-color 1.5s ease;
+    padding: 2%;
+    transition: border-color 1s ease, background-color 1s ease;
+    border-color: #030303;
 }
 button:hover{
     background-color: #030303;

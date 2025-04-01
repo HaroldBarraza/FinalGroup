@@ -5,7 +5,7 @@ export default function homelogo(){
     return(
         <div
         className={`${playfairDisplay.className}`}>
-            <p className="text-[100px]">Home Made.com</p>
+            <p className="title">Home Made.com</p>
         </div>
     )
 }

@@ -1,11 +1,18 @@
 .aboutus{
-    background-color: #FAFAFA;
+    background-color: #e4dfd9;
     color: #030303;
 }
 h1,h2,h3{
     font-size: 40px;
     text-align: center;
+    font-family: "Playfair Display", serif;
 }
 p{
     font-size: 18px;
+    font-family: "Roboto", sans-serif;
+}
+.imagen img, .imagen2 img{
+    width: 90%;
+    height: auto;
+    margin: 5%;
 }
