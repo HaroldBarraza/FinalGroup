@@ -64,3 +64,18 @@
     text-align:inherit;
     margin-top: auto;
 }
+button{
+    background-color: #FAFAFA;
+    color: #030303;
+    font-family: "Quicksand", sans-serif;
+    font-size: 20px;
+    border-radius: 37px;
+    border-style: solid;
+    padding: 2%;
+    transition: border-color 1s ease, background-color 1s ease;
+    border-color: #030303;
+}
+button:hover{
+    background-color: #030303;
+    color: #FAFAFA;
+}

@@ -57,7 +57,6 @@ export default async function CeramicItemsTable({ searchParams }: { searchParams
             <div className="items-container">
                 {sortedItems?.map((item) => (
                     <div key={item.name} className="item">
-                        <div key={item.id} className='id'>{item.id}</div>
                         <div className="item-content">
                             {item.image ? (
                                 <Image
@@ -75,7 +74,6 @@ export default async function CeramicItemsTable({ searchParams }: { searchParams
                             )}
                             <div>
                                 <h2 className="item-name">{item.name}</h2>
-                                <p className="item-description">{item.description}</p>
                                 <p className="item-price">{`Precio: $${item.price.toFixed(2)}`}</p>
                                 <Link href={`/dashboard/ceramic/${item.id}`}>
                                     <button>View more information</button>

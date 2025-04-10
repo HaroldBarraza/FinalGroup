@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import '@/app/ui/invoices/review.css';
 
 interface ReviewFormProps {
     productId: number;
@@ -34,18 +35,25 @@ const ReviewForm: React.FC<ReviewFormProps> = ({ productId, onReviewAdded }) => 
 
     return (
         <form onSubmit={handleSubmit}>
-            <div>
+            <div className='rating'>
                 <label>Rating:</label>
-                <input
-                    type="number"
-                    value={rating}
-                    onChange={(e) => setRating(Number(e.target.value))}
-                    min="1"
-                    max="5"
-                    required
-                />
+                <div>
+                    {[1, 2, 3, 4, 5].map((star) => (
+                        <span
+                            key={star}
+                            onClick={() => setRating(star)}
+                            style={{
+                                cursor: 'pointer',
+                                fontSize: '30px',
+                                color: star <= rating ? 'gold' : 'gray',
+                            }}
+                        >
+                            ★
+                        </span>
+                    ))}
+                </div>
             </div>
-            <div>
+            <div className='commentinput'>
                 <label>Comment:</label>
                 <textarea
                     value={comment}
@@ -53,7 +61,7 @@ const ReviewForm: React.FC<ReviewFormProps> = ({ productId, onReviewAdded }) => 
                     required
                 />
             </div>
-            <button type="submit">Add Review</button>
+            <button className='enviar' type="submit">Add Review</button>
         </form>
     );
 };

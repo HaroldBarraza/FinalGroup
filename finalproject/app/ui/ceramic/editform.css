@@ -1,0 +1,33 @@
+.product{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+.form-groupimg{
+    grid-row: 1/2;
+}
+.product{
+    color: #030303;
+    background-color: #8f9d86;
+}
+.information{
+    grid-row: 1/2;
+}
+.form-groupimg img{
+    width: 100%;
+    height: auto;
+}
+.form-groupname{
+    font-family:"Playfair Display", serif;
+    font-size: 70px;
+}
+.form-groupdescription{
+    margin-top: 40px;
+    font-family:"Roboto", sans-serif;
+    font-size: 30px;
+}
+.form-groupprice{
+    font-family:"Roboto", sans-serif;
+    font-size: 60px;
+    text-align: right;
+    margin-top: 9%;
+}

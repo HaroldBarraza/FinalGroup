@@ -1,0 +1,49 @@
+.filter-container {
+    gap: 8px;
+    margin: 12px;
+    color: #030303;
+    font-family: "Roboto", sans-serif;
+  }
+  
+  .filter-container select {
+    appearance: none;
+    overflow: hidden;
+    position: relative;
+    min-width: 240px;
+    height: 50px;
+    font-size: 14px;
+    padding: 12px 48px 12px 12px;
+    border: solid 1px #999;
+    border-radius: 6px;
+    background-color: #fff;
+    background-image: url(https://www.svgrepo.com/show/362528/caret-down-bold.svg);
+    background-size: 18px;
+    background-repeat: no-repeat;
+    background-position: calc(100% - 12px) 14px;
+    cursor: pointer;
+    outline: none;
+  }
+  
+  .filter-container select:focus {
+    padding: 12px;
+    outline: 2px solid #09C;
+    outline-offset: 2px;
+  }
+  
+  .filter-container option {
+    font-size: 14px;
+    color: #666;
+    background-color: transparent;
+    padding: 12px;
+  }
+  
+  .filter-container option:hover {
+    background-color: #eee;
+  }
+  
+  .filter-container option:checked {
+    color: #39C;
+    font-weight: bold;
+    background: linear-gradient(#fff, #fff);
+  }
+  

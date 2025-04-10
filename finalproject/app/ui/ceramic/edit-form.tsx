@@ -3,6 +3,7 @@ import React, { useState , useEffect } from 'react';
 import Image from 'next/image';
 import ReviewForm from '@/app/ui/invoices/reviewform';
 import ReviewList from '@/app/ui/invoices/reviewlist';
+import '@/app/ui/ceramic/editform.css'
 
 interface CeramicItem {
     id: number;
@@ -41,16 +42,19 @@ const EditForm: React.FC<EditFormProps> = ({ product }) => {
 
     return (
         <div className="edit-form">
-            <div className="form-group">
-                <div>{product.name}</div>
-            </div>
-            <div className="form-group">
-                <div>{`$${product.price.toFixed(2)}`}</div>
-            </div>
-            <div className="form-group">
-                <div>{product.description}</div>
-            </div>
-            <div className="form-group">
+            <div className='product'>
+                <div className='information'>
+                    <div className="form-groupname">
+                        <div>{product.name}</div>
+                    </div>
+                    <div className="form-groupdescription">
+                        <div>{product.description}</div>
+                    </div>
+                    <div className="form-groupprice">
+                        <div>{`$${product.price.toFixed(2)}`}</div>
+                    </div>
+                </div>
+            <div className="form-groupimg">
                 {product.image ? (
                     <Image
                         src={product.image}
@@ -63,6 +67,7 @@ const EditForm: React.FC<EditFormProps> = ({ product }) => {
                 ) : (
                     <div>No hay imagen disponible</div>
                 )}
+                </div>
             </div>
             <ReviewForm productId={product.id} onReviewAdded={fetchReviews} />
             <ReviewList reviews={reviews} />

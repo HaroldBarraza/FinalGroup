@@ -1,0 +1,43 @@
+form,.coment{
+    background-color: #eae8e8;
+    color: #030303;
+
+}
+.commentspace{
+    margin-left: 3%;
+    margin-bottom: 1.5%;
+    width: 60%;
+    font-family: "Roboto", sans-serif;
+    list-style-type: none;
+}
+.enviar{
+    background-color: #FAFAFA;
+    color: #030303;
+    font-family: "Quicksand", sans-serif;
+    font-size: 20px;
+    border-radius: 37px;
+    border-style: solid;
+    padding: 1%;
+    transition: border-color 1s ease, background-color 1s ease;
+    border-color: #030303;
+}
+.enviar:hover{
+    background-color: #030303;
+    color: #FAFAFA;
+}
+textarea {
+    background-color: #eae8e8;
+    resize: none;
+    width: 100%;     
+    height: 100px;   
+    padding: 8px;
+    font-size: 1rem;
+    color: #030303;
+  }
+
+.rating{
+    font-size: 35px;
+}
+.commentinput{
+    font-size: 25px;
+}
