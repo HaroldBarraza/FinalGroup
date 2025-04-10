@@ -1,4 +1,4 @@
-// app/dashboard/layout.tsx
+
 import SideNav from "@/app/ui/dashboard/sidenav";
 import Footer from "@/app/ui/dashboard/footer";
 

@@ -1,7 +1,6 @@
-// app/ui/invoices/Search.tsx
 'use client'; 
 import { useSearchParams, usePathname, useRouter } from 'next/navigation';
-import '@/app/ui/invoices/search.css'; // Asegúrate de que la ruta sea correcta
+import '@/app/ui/invoices/search.css';
 import Image from 'next/image';
 
 export default function Search({ placeholder }: { placeholder: string }) {
