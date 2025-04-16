@@ -13,7 +13,7 @@ export default function SideNav(){
             <div className="logo">
                 <Homelogo/>
             </div>
-            <Link href="/login">Log In</Link>
+            <Link href="/dashboard/login">Log In</Link>
             <div className="search">
                 <Suspense fallback={<div>Searching...</div>}>
                     <Search placeholder="Search..." />

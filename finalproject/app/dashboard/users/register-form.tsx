@@ -1,0 +1,88 @@
+'use client';
+
+import { useState } from 'react';
+import { useActionState } from 'react';
+import { registerUser  } from '@/app/lib/actions';
+import { startTransition } from 'react';
+import { useRouter } from 'next/navigation';
+
+interface ActionState {
+  success: boolean;
+  message: string;
+}
+
+export default function RegisterForm() {
+  const [email, setEmail] = useState('');
+  const [name, setName] = useState('');
+  const [password, setPassword] = useState('');
+  const [actionState, formAction] = useActionState<ActionState | undefined, FormData>(registerUser , undefined);
+  const router = useRouter();
+
+  const errorMessage = actionState?.success === false ? actionState.message : undefined;
+  const successMessage = actionState?.success === true ? actionState.message : undefined;
+
+  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    const formData = new FormData(event.currentTarget);
+
+    startTransition(() => {
+      formAction(formData); // Llama a formAction con los datos del formulario
+    });
+  };
+
+  // Verifica si el estado de la acción ha cambiado y redirige si es exitoso
+  if (actionState?.success) {
+    router.push('/dashboard/login');
+  }
+
+  return (
+    <form onSubmit={handleSubmit} className="register-form">
+      <div className="form-group">
+        <label htmlFor="name">Nombre</label>
+        <input 
+          id="name"
+          type="text"
+          name="name"
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+          required
+        />
+      </div>
+
+      <div className="form-group">
+        <label htmlFor="email">Email</label>
+        <input 
+          id="email"
+          type="email"
+          name="email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          required
+        />
+      </div>
+
+      <div className="form-group">
+        <label htmlFor="password">Contraseña</label>
+        <input
+          id="password"
+          type="password"
+          name="password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+          required
+          minLength={6}
+        />
+      </div>
+
+      <button type="submit">Registrarse</button>
+
+      {errorMessage && (
+        <div className="error-message">{errorMessage}</div>
+      )}
+
+      {successMessage && (
+        <div className="success-message">{successMessage}</div>
+      )}
+    </form>
+  );
+}

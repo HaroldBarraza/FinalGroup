@@ -1,32 +1,76 @@
 'use server';
 
-import { z } from 'zod';
-import postgres from 'postgres';
-import { revalidatePath } from 'next/cache';
+import { signIn } from '@/app/dashboard/users/auth';
+import { AuthError } from 'next-auth';
+import { Client } from 'pg';
+import { hash } from 'bcrypt';
 
-const sql = postgres(process.env.POSTGRES_URL!, { ssl: { rejectUnauthorized: false } });
-
-const ProductSchema = z.object({
-    id: z.string(),
-    name: z.string(),
-    price: z.coerce.number(),
-    description: z.string(),
-});
+interface AuthResult {
+  success: boolean;
+  message: string;
+}
 
 
-export async function updateProduct(id: string, formData: FormData) {
-    const { name, price, description } = ProductSchema.parse({
-        id,
-        name: formData.get('name'),
-        price: formData.get('price'),
-        description: formData.get('description'),
+export async function authenticate(
+  prevState: AuthResult | undefined,
+  formData: FormData,
+): Promise<AuthResult> {
+  try {
+    const result = await signIn('credentials', {
+      redirect: false,
+      ...Object.fromEntries(formData),
     });
 
-    await sql`
-        UPDATE ceramic
-        SET name = ${name}, price = ${price}, description = ${description}
-        WHERE id = ${id}
-    `;
+    if (result?.error) {
+      return { success: false, message: result.error };
+    }
 
-    revalidatePath(`/dashboard/ceramic/${id}`); 
+    return { success: true, message: 'Inicio de sesión exitoso.' };
+  } catch (error) {
+    if (error instanceof AuthError) {
+      switch (error.type) {
+        case 'CredentialsSignin':
+          return { success: false, message: 'Credenciales inválidas.' };
+        default:
+          return { success: false, message: 'Algo salió mal.' };
+      }
+    }
+    throw error;
+  }
 }
+export async function registerUser (
+    prevState: AuthResult | undefined,
+    formData: FormData,
+  ): Promise<AuthResult> {
+    const email = formData.get('email') as string;
+    const name = formData.get('name') as string;
+    const password = formData.get('password') as string;
+  
+    const client = new Client({
+      connectionString: process.env.POSTGRES_URL,
+      ssl: {
+        rejectUnauthorized: false,
+      },
+    });
+  
+    try {
+      await client.connect(); 
+  
+      const existingUser  = await client.query('SELECT * FROM users WHERE email = $1', [email]);
+      if (existingUser .rows.length > 0) {
+        return { success: false, message: 'El correo electrónico ya está en uso.' };
+      }
+  
+
+      const hashedPassword = await hash(password, 10);
+  
+      await client.query('INSERT INTO users (email, name, password) VALUES ($1, $2, $3)', [email, name, hashedPassword]);
+  
+      return { success: true, message: 'Registro exitoso. Redirigiendo a la página de inicio de sesión...' };
+    } catch (error) {
+      console.error('Error al registrar el usuario:', error);
+      return { success: false, message: 'Error al crear cuenta.' };
+    } finally {
+      await client.end();
+    }
+  }

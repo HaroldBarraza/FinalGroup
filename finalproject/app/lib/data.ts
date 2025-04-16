@@ -5,6 +5,12 @@ const sql = postgres(process.env.POSTGRES_URL!, { ssl: { rejectUnauthorized: fal
 
 export default sql;
 
+export interface User{
+    id: number;
+    name: string;
+    password: string;
+}
+
 export interface CeramicItem {
     
     id: number;
@@ -111,3 +117,4 @@ export async function fetchProductById(productId: number): Promise<CeramicItem |
         throw new Error('Failed to fetch product data');
     }
 }
+
