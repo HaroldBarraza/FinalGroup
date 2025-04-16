@@ -21,7 +21,7 @@ const ReviewList: React.FC<ReviewListProps> = ({ reviews }) => {
                         key={star}
                         style={{
                             color: star <= rating ? 'gold' : 'gray',
-                            fontSize: '20px', // Ajusta el tamaño según sea necesario
+                            fontSize: '20px',
                         }}
                     >
                         ★
@@ -33,16 +33,16 @@ const ReviewList: React.FC<ReviewListProps> = ({ reviews }) => {
 
     return (
         <div className='coment'>
-            <h3>Reseñas</h3>
+            <h3>Reviews</h3>
             {reviews.length === 0 ? (
-                <p>No hay reseñas para este producto.</p>
+                <p>There are no reviews for this product.</p>
             ) : (
                 <ul>
                     {reviews.map(review => (
                         <li key={review.id} className='commentspace'>
                             <strong></strong> {review.comment} <br />
                             <strong></strong> {renderStars(review.rating)} <br />
-                            <small>Fecha: {new Date(review.create_at).toLocaleString()}</small>
+                            <small>Date:{new Date(review.create_at).toLocaleString()}</small>
                         </li>
                     ))}
                 </ul>

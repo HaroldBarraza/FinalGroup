@@ -30,6 +30,7 @@ main{
 .jew p,.decor p,.ceramic p,.clothing p{
     color: #030303;
     font-family: "Roboto", sans-serif;
+    font-size: 30px;
 }
 .jew{
     background-color: #C9C1BD;
@@ -46,7 +47,6 @@ background-color: #C4DBE1;
 .clothing, .ceramic, .decor, .jew{
     display: grid;
     grid-template-columns: 1fr 1fr;
-    grid-template-rows: 100px 1fr 1fr;
     margin: 1% 1% 1% 1%;
     padding: 1%;
     font-size: 50px;

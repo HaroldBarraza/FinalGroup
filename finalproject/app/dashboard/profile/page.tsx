@@ -2,7 +2,6 @@ import { auth } from '@/app/dashboard/users/auth';
 import postgres from 'postgres';
 import ProfilePageClient from '@/app/dashboard/profile/clientpage';
 
-// ✅ Importamos el tipo de usuario
 export interface User {
   id: number;
   name: string;

@@ -5,27 +5,37 @@ import '@/app/ui/invoices/search.css';
 import Image from 'next/image';
 import Link from 'next/link';
 
+interface SearchResultItem {
+  id: number;
+  name: string;
+  image: string;
+  category: string;
+}
+
 export default function Search({ placeholder }: { placeholder: string }) {
   const searchParams = useSearchParams();
   const pathname = usePathname();
   const { replace } = useRouter();
 
-  const [results, setResults] = useState<any[]>([]);
-  const [query, setQuery] = useState<string>(searchParams.get('query') || '');
+  const [results, setResults] = useState<SearchResultItem[]>([]);
+  const [query, setQuery] = useState('');
 
   function handleSearch(term: string) {
-    setQuery(term);
     const params = new URLSearchParams(searchParams);
     params.set('page', '1');
+    setQuery(term);
+
     if (term) {
       params.set('query', term);
     } else {
       params.delete('query');
     }
+
     replace(`${pathname}?${params.toString()}`);
   }
 
   useEffect(() => {
+    const query = searchParams.get('query');
     if (!query) {
       setResults([]);
       return;
@@ -34,10 +44,13 @@ export default function Search({ placeholder }: { placeholder: string }) {
     fetch(`/api/search?query=${query}`)
       .then((res) => res.json())
       .then((data) => {
-        setResults(data.results);
+        setResults(data.results || []);
       })
-      .catch((err) => console.error(err));
-  }, [query, searchParams]);
+      .catch((err) => {
+        console.error(err);
+        setResults([]);
+      });
+  }, [searchParams]);
 
   return (
     <div className="totalsearch">
@@ -45,14 +58,14 @@ export default function Search({ placeholder }: { placeholder: string }) {
         className="searchbar"
         placeholder={placeholder}
         onChange={(e) => handleSearch(e.target.value)}
-        value={query}
+        defaultValue={searchParams.get('query')?.toString()}
       />
 
       {query && (
         <div className="search-results">
           {results.length > 0 ? (
-            results.map((item, index) => (
-              <div key={index} className="search-result-item">
+            results.map((item) => (
+              <div key={`${item.category}-${item.id}`} className="search-result-item">
                 <Link href={`/dashboard/${item.category}/${item.id}`} passHref>
                   <div className="result-item">
                     <Image

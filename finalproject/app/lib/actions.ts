@@ -46,7 +46,6 @@ export async function registerUser(
   const name = formData.get('name') as string;
   const password = formData.get('password') as string;
 
-  // Configuración de la conexión PostgreSQL
   const sql = postgres(process.env.POSTGRES_URL!, {
     ssl: {
       rejectUnauthorized: false,
@@ -54,7 +53,6 @@ export async function registerUser(
   });
 
   try {
-    // Verificar si el usuario ya existe
     const existingUsers = await sql`
       SELECT * FROM users WHERE email = ${email}
     `;
@@ -63,10 +61,8 @@ export async function registerUser(
       return { success: false, message: 'El correo electrónico ya está en uso.' };
     }
 
-    // Hashear la contraseña
     const hashedPassword = await hash(password, 10);
 
-    // Crear nuevo usuario
     await sql`
       INSERT INTO users (email, name, password) 
       VALUES (${email}, ${name}, ${hashedPassword})
@@ -80,7 +76,6 @@ export async function registerUser(
     console.error('Error al registrar el usuario:', error);
     return { success: false, message: 'Error al crear cuenta.' };
   } finally {
-    // Cerrar la conexión
     await sql.end();
   }
 }

@@ -3,6 +3,7 @@
 import { useActionState, useEffect } from 'react';
 import { authenticate } from '@/app/lib/actions';
 import { startTransition } from 'react';
+import '@/app/dashboard/users/loginform.css'
 
 interface ActionState {
   success: boolean;
@@ -52,7 +53,7 @@ export default function LoginForm() {
         />
       </div>
       
-      <button type="submit">Iniciar sesión</button>
+      <button type="submit">Login</button>
       
       {errorMessage && (
         <div className="error-message">{errorMessage}</div>

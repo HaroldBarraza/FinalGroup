@@ -5,6 +5,7 @@ import { useActionState } from 'react';
 import { registerUser  } from '@/app/lib/actions';
 import { startTransition } from 'react';
 import { useRouter } from 'next/navigation';
+import '@/app/dashboard/users/register.css'
 
 interface ActionState {
   success: boolean;
@@ -26,11 +27,10 @@ export default function RegisterForm() {
     const formData = new FormData(event.currentTarget);
 
     startTransition(() => {
-      formAction(formData); // Llama a formAction con los datos del formulario
+      formAction(formData);  
     });
   };
 
-  // Verifica si el estado de la acción ha cambiado y redirige si es exitoso
   if (actionState?.success) {
     router.push('/dashboard/login');
   }
@@ -38,7 +38,7 @@ export default function RegisterForm() {
   return (
     <form onSubmit={handleSubmit} className="register-form">
       <div className="form-group">
-        <label htmlFor="name">Nombre</label>
+        <label htmlFor="name">Name</label>
         <input 
           id="name"
           type="text"
@@ -62,7 +62,7 @@ export default function RegisterForm() {
       </div>
 
       <div className="form-group">
-        <label htmlFor="password">Contraseña</label>
+        <label htmlFor="password">Password</label>
         <input
           id="password"
           type="password"
@@ -74,7 +74,7 @@ export default function RegisterForm() {
         />
       </div>
 
-      <button type="submit">Registrarse</button>
+      <button type="submit">Register</button>
 
       {errorMessage && (
         <div className="error-message">{errorMessage}</div>

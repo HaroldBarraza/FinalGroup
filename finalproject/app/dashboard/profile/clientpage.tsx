@@ -2,6 +2,7 @@
 
 import { signOut } from 'next-auth/react';
 import { useState } from 'react';
+import '@//app/dashboard/profile/profile.css'
 
 interface User {
   id: number;
@@ -37,72 +38,73 @@ export default function ProfilePageClient({ user }: { user: User }) {
   };
 
   return (
-    <main className="p-8 max-w-xl mx-auto space-y-6">
-      <h1 className="text-2xl font-bold">Perfil</h1>
+    <div className="p-8 max-w-xl mx-auto space-y-6">
+      <h1 className="perfil-title">Profile</h1>
 
-      {!isEditing ? (
-        <div className="space-y-4">
-          <p><strong>Nombre:</strong> {name}</p>
-          <p><strong>Biografía:</strong> {bio || 'Sin biografía'}</p>
+          {!isEditing ? (
+            <div className="perfil-gap">
+              <p><strong>Name:</strong> {name}</p>
+              <p><strong>Bio:</strong> {bio || 'No bio available'}</p>
+              <button
+                onClick={() => setIsEditing(true)}
+                className="perfil-button blue"
+              >
+                Edit Profile
+              </button>
+            </div>
+          ) : (
+            <form onSubmit={handleUpdate} className="perfil-gap">
+              <div className="perfil-group">
+                <label className="perfil-label">Name:</label>
+                <input
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
+                  className="perfil-input"
+                />
+              </div>
+          
+              <div className="perfil-group">
+                <label className="perfil-label">Bio:</label>
+                <textarea
+                  value={bio}
+                  onChange={(e) => setBio(e.target.value)}
+                  className="perfil-textarea"
+                />
+              </div>
+          
+              <div className="flex gap-4">
+                <button type="submit" className="perfil-button green">
+                  Save Changes
+                </button>
+                <button
+                  type="button"
+                  onClick={() => {
+                    setName(user.name);
+                    setBio(user.bio || '');
+                    setIsEditing(false);
+                  }}
+                  className="perfil-button gray"
+                >
+                  Cancel
+                </button>
+              </div>
+                
+              {message && <p className="perfil-message-success">{message}</p>}
+            </form>
+          )}
+          
+          <div className="pt-4 perfil-gap">
+            <p><strong>Email:</strong> {user.email}</p>
+            <p><strong>Created At:</strong> {new Date(user.time).toLocaleDateString()}</p>
+          </div>
+          
           <button
-            onClick={() => setIsEditing(true)}
-            className="bg-blue-600 text-white px-4 py-2 rounded"
+            onClick={handleLogout}
+            className="perfil-button red mt-6"
           >
-            Editar perfil
+            Log Out
           </button>
-        </div>
-      ) : (
-        <form onSubmit={handleUpdate} className="space-y-4">
-          <div>
-            <label className="block font-medium">Nombre:</label>
-            <input
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-              className="w-full border px-2 py-1 rounded"
-            />
-          </div>
 
-          <div>
-            <label className="block font-medium">Biografía:</label>
-            <textarea
-              value={bio}
-              onChange={(e) => setBio(e.target.value)}
-              className="w-full border px-2 py-1 rounded"
-            />
-          </div>
-
-          <div className="flex gap-4">
-            <button type="submit" className="bg-green-600 text-white px-4 py-2 rounded">
-              Guardar cambios
-            </button>
-            <button
-              type="button"
-              onClick={() => {
-                setName(user.name);
-                setBio(user.bio || '');
-                setIsEditing(false);
-              }}
-              className="bg-gray-500 text-white px-4 py-2 rounded"
-            >
-              Cancelar
-            </button>
-          </div>
-
-          {message && <p className="text-green-600">{message}</p>}
-        </form>
-      )}
-
-      <div className="pt-4 space-y-2">
-        <p><strong>Email:</strong> {user.email}</p>
-        <p><strong>Fecha de creación:</strong> {new Date(user.time).toLocaleDateString()}</p>
-      </div>
-
-      <button
-        onClick={handleLogout}
-        className="bg-red-600 text-white px-4 py-2 rounded mt-6"
-      >
-        Cerrar sesión
-      </button>
-    </main>
+    </div>
   );
 }

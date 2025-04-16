@@ -23,7 +23,7 @@ export default async function ProductDetailPage({ params }: { params: Promise<{ 
 
     return (
         <main>
-            <h1>Producto Details</h1>
+            <h1>Product Details</h1>
             <EditForm product={product} />
         </main>
     );
