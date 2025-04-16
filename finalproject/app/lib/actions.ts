@@ -2,14 +2,13 @@
 
 import { signIn } from '@/app/dashboard/users/auth';
 import { AuthError } from 'next-auth';
-import { Client } from 'pg';
+import postgres from 'postgres';
 import { hash } from 'bcrypt';
 
 interface AuthResult {
   success: boolean;
   message: string;
 }
-
 
 export async function authenticate(
   prevState: AuthResult | undefined,
@@ -38,39 +37,50 @@ export async function authenticate(
     throw error;
   }
 }
-export async function registerUser (
-    prevState: AuthResult | undefined,
-    formData: FormData,
-  ): Promise<AuthResult> {
-    const email = formData.get('email') as string;
-    const name = formData.get('name') as string;
-    const password = formData.get('password') as string;
-  
-    const client = new Client({
-      connectionString: process.env.POSTGRES_URL,
-      ssl: {
-        rejectUnauthorized: false,
-      },
-    });
-  
-    try {
-      await client.connect(); 
-  
-      const existingUser  = await client.query('SELECT * FROM users WHERE email = $1', [email]);
-      if (existingUser .rows.length > 0) {
-        return { success: false, message: 'El correo electrónico ya está en uso.' };
-      }
-  
 
-      const hashedPassword = await hash(password, 10);
-  
-      await client.query('INSERT INTO users (email, name, password) VALUES ($1, $2, $3)', [email, name, hashedPassword]);
-  
-      return { success: true, message: 'Registro exitoso. Redirigiendo a la página de inicio de sesión...' };
-    } catch (error) {
-      console.error('Error al registrar el usuario:', error);
-      return { success: false, message: 'Error al crear cuenta.' };
-    } finally {
-      await client.end();
+export async function registerUser(
+  prevState: AuthResult | undefined,
+  formData: FormData,
+): Promise<AuthResult> {
+  const email = formData.get('email') as string;
+  const name = formData.get('name') as string;
+  const password = formData.get('password') as string;
+
+  // Configuración de la conexión PostgreSQL
+  const sql = postgres(process.env.POSTGRES_URL!, {
+    ssl: {
+      rejectUnauthorized: false,
+    },
+  });
+
+  try {
+    // Verificar si el usuario ya existe
+    const existingUsers = await sql`
+      SELECT * FROM users WHERE email = ${email}
+    `;
+
+    if (existingUsers.length > 0) {
+      return { success: false, message: 'El correo electrónico ya está en uso.' };
     }
+
+    // Hashear la contraseña
+    const hashedPassword = await hash(password, 10);
+
+    // Crear nuevo usuario
+    await sql`
+      INSERT INTO users (email, name, password) 
+      VALUES (${email}, ${name}, ${hashedPassword})
+    `;
+
+    return { 
+      success: true, 
+      message: 'Registro exitoso. Redirigiendo a la página de inicio de sesión...' 
+    };
+  } catch (error) {
+    console.error('Error al registrar el usuario:', error);
+    return { success: false, message: 'Error al crear cuenta.' };
+  } finally {
+    // Cerrar la conexión
+    await sql.end();
   }
+}
