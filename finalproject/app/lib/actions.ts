@@ -24,7 +24,7 @@ export async function authenticate(
       return { success: false, message: result.error };
     }
 
-    return { success: true, message: 'Inicio de sesión exitoso.' };
+    return { success: true, message: '/dashboard/profile' };;
   } catch (error) {
     if (error instanceof AuthError) {
       switch (error.type) {

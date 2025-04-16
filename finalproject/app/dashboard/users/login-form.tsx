@@ -1,6 +1,6 @@
 'use client';
 
-import { useActionState } from 'react';
+import { useActionState, useEffect } from 'react';
 import { authenticate } from '@/app/lib/actions';
 import { startTransition } from 'react';
 
@@ -14,6 +14,11 @@ export default function LoginForm() {
   
   const errorMessage = actionState?.success === false ? actionState.message : undefined;
   const successMessage = actionState?.success === true ? actionState.message : undefined;
+  useEffect(() => {
+    if (actionState?.success && actionState.message) {
+      window.location.href = actionState.message;
+    }
+  }, [actionState]);
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
