@@ -8,7 +8,6 @@ import Link from 'next/link';
 interface SearchResultItem {
   id: number;
   name: string;
-  image: string;
   category: string;
 }
 
@@ -68,13 +67,6 @@ export default function Search({ placeholder }: { placeholder: string }) {
               <div key={`${item.category}-${item.id}`} className="search-result-item">
                 <Link href={`/dashboard/${item.category}/${item.id}`} passHref>
                   <div className="result-item">
-                    <Image
-                      src={item.image || '/default-product-image.png'}
-                      alt={item.name}
-                      width={50}
-                      height={50}
-                      className="product-image"
-                    />
                     <strong>{item.name}</strong> <span>({item.category})</span>
                   </div>
                 </Link>
