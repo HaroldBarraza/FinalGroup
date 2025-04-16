@@ -3,7 +3,7 @@
 import { signIn } from '@/app/dashboard/users/auth';
 import { AuthError } from 'next-auth';
 import postgres from 'postgres';
-import { hash } from 'bcrypt';
+import { hash } from 'bcryptjs';
 
 interface AuthResult {
   success: boolean;
