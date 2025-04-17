@@ -2,7 +2,6 @@
 import { useState, useEffect } from 'react';
 import { useSearchParams, usePathname, useRouter } from 'next/navigation';
 import '@/app/ui/invoices/search.css';
-import Image from 'next/image';
 import Link from 'next/link';
 
 interface SearchResultItem {
